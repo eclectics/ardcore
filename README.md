@@ -45,3 +45,15 @@ linked
 The matrix array holds initial values.
 
 It seems like more fun to decrement all the counters on each clock. 
+
+## e16_oneliner
+
+A simple sketch to select from the totally amazing [one line music programs
+created and collected by Viznut](http://countercomplex.blogspot.com.au/search/label/algorithmic%20music)
+* 
+* A0 sets the delay between each iteration (I like about 1/4 turn cw)
+* A2 chooses the formula
+* controls are only read on clock in, so for responsive controls give it
+a quick clock. This also allows patching a random source into A2 and using
+a gate to change the formula, or patching cv and gate from a keyboard for
+easier control.
