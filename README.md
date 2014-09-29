@@ -10,6 +10,11 @@ There's a bunch more to add after I've tidied them up.
 ## e11_multifunction 
 A bunch of sketches in one. Use A0 and A1 to specify which sketch, then press
 the reset. 
+
+With A0 and A1 full CCW, use each knob to dial a value from 0-7, which is shown on the expander LEDs, thus
+selecting between up to 32 different sketches (ie 3/4 is equivalent to 4/3)
+then press the reset button to load the relevant sketch. There's many empty
+slots which will be filled in over time.
  
 ## e15_meadow
 
