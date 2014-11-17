@@ -43,8 +43,10 @@ const int pinOffset = 5;
 unsigned long time,lastctrl;
 
 //notes are just 0-255 going up in 1/60 increments rounded. 1/60 because 5 octaves of 12 notes each
-byte notes[]={0,4,9,13,17,21,26,30,34,38,43,47,51,55,60,64,68,72,77,81,85,89,94,98,102,106,111,115,119,123,128,132,136,140,145,149,153,157,162,166,170,174,179,183,187,191,196,200,204,208,213,217,221,225,230,234,238,242,247,251,255};
+//byte notes[]={0,4,9,13,17,21,26,30,34,38,43,47,51,55,60,64,68,72,77,81,85,89,94,98,102,106,111,115,119,123,128,132,136,140,145,149,153,157,162,166,170,174,179,183,187,191,196,200,204,208,213,217,221,225,230,234,238,242,247,251,255};
 
+//thanks to dashwood for the following vales, which sound better
+byte notes[]={0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,92,96,100,104,108,112,116,120,124,128,132,136,140,144,148,152,156,161,165,169,173,177,181,185,189,193,197,201,205,209,214,218,222,226,230,234,238,242};
   //using a 12 digit binary number to represent in and out of scale, each digit corresponds to 1 note
   //It gets translated to an octal number because using binary representation is limited to 8 digits unfortunately
   //In octal each digit is 0-7 and represents 3 binary digits, So
@@ -60,7 +62,7 @@ byte notes[]={0,4,9,13,17,21,26,30,34,38,43,47,51,55,60,64,68,72,77,81,85,89,94,
 
   //The scale is chosen by A0, so the more there are here, the more fiddly it is
   int scales[]={07777, //chromatic
-              05235, //major 101 011 010 101 5325
+              05325, //major 101 011 010 101 5325
               05532,     //minor natural 101 101 011 010  5532
               //05531,      //minor harmonic 101 101 011 001 
               //05646,      //heptatonic blues, lowered 357 101 110 100 110 5646 
