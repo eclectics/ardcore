@@ -50,10 +50,37 @@ It seems like more fun to decrement all the counters on each clock.
 
 A simple sketch to select from the totally amazing [one line music programs
 created and collected by Viznut](http://countercomplex.blogspot.com.au/search/label/algorithmic%20music)
-* 
+ 
 * A0 sets the delay between each iteration (I like about 1/4 turn cw)
 * A2 chooses the formula
 * controls are only read on clock in, so for responsive controls give it
 a quick clock. This also allows patching a random source into A2 and using
 a gate to change the formula, or patching cv and gate from a keyboard for
 easier control.
+
+
+## e22_quantiser
+
+Basic quantiser
+
+* A0 scale selection (from those set in sketch)
+* A1 octave range
+* A2 cv to be quantised, full CW for no attenuation; attenuation will alter the range but not in octave increments
+* D1 lights when note chnages
+* analog out for quantised cv
+
+Different scales can be created, the  process is straightforward and documented in the sketch.
+
+Thanks to dashwood for proper tuning values.
+
+## e26_rdntrig
+
+Simple clocked random triggers on D0/D1, and random looping sequence on analog
+out (low byte of a 16 bit shift register, ala Turing Machine and others.
+
+Trigger time is 30ms, easy to edit in sketch
+
+* Clk in for clock
+* A0/A1 choose chance of D0/D1 trigger on clock from CCW never to CW always
+* A3 chooses chance of bit flip on the 16 bit shift register from CCW never to
+CW always
