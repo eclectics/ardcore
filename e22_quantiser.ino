@@ -72,7 +72,7 @@ byte notes[]={0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,
             };
 
   byte note=0; 
-  byte lastnote=0; //note read
+  int readnote=0,lastnote=0; //note read
   byte selscale;  //holds index of currently seleected scale
   byte scale[61]; //this holds the notes we select out of the full range for the current scale
   byte scalenotes; //how many notes in the scale
@@ -122,10 +122,13 @@ void loop(){
       }
        numnotes=scalenotes*range;
     }
-    note=map(analogRead(A2),0,1023,0,numnotes-1);
-    if (lastnote!=note) {
+
+    readnote=deJitter(analogRead(A2),readnote);
+
+    if (lastnote!=readnote) {
+      lastnote=readnote;
+      note=map(readnote,0,1023,0,numnotes-1);
       dacOutput(scale[note]);
-      lastnote=note;
       digitalWrite(digPin[0],HIGH); //indicate change of note 
       delay(20);
       digitalWrite(digPin[0],LOW);
@@ -147,7 +150,7 @@ int deJitter(int v, int test) {
 // this routine just make sure we have a significant value
 // change before we bother implementing it. This is useful
 // for cleaning up jittery analog inputs.
-       if (abs(v - test) > 8) {
+       if (abs(v - test) > 4) {
            return v;
        }
        return test;
