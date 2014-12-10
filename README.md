@@ -84,3 +84,14 @@ Trigger time is 30ms, easy to edit in sketch
 * A0/A1 choose chance of D0/D1 trigger on clock from CCW never to CW always
 * A3 chooses chance of bit flip on the 16 bit shift register from CCW never to
 CW always
+
+## e27_rndswtrig
+
+Similar to above, but on each clock either D0 or D1 is triggered, chance of D0
+determined by A0.
+ 
+* Clk in for clock
+* A0 choose chance of D0 trigger on clock from CCW never to CW always; D1
+triggers when D0 doesn't
+* A3 chooses chance of bit flip on the 16 bit shift register from CCW never to
+* A4 scales the analog out from fully attenuated CCW to fully open CW
