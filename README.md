@@ -71,7 +71,7 @@ Basic quantiser
 
 Different scales can be created, the  process is straightforward and documented in the sketch.
 
-Thanks to dashwood for proper tuning values.
+Thanks to dashwood for proper tuning values, and the arpeggio scales
 
 ## e26_rdntrig
 

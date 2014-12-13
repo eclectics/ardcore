@@ -64,10 +64,10 @@ byte notes[]={0,4,8,12,16,20,24,28,32,36,40,44,48,52,56,60,64,68,72,76,80,84,88,
   int scales[]={07777, //chromatic
               05325, //major 101 011 010 101 5325
               05532,     //minor natural 101 101 011 010  5532
-              //05531,      //minor harmonic 101 101 011 001 
-              //05646,      //heptatonic blues, lowered 357 101 110 100 110 5646 
-            //  04100,     //major 4ths? 100 001 000 000
-            //  04221     //major 3rds? 100 010 010 001
+              04420,  //minor arpeggio
+              04422,  //minor7th arpeggio
+              04220,  //major arpeggio
+              04221,  //major7th arpeggio 
               02452    //pentatonic 010 100 101 010 2452
             };
 
