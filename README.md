@@ -93,5 +93,28 @@ determined by A0.
 * Clk in for clock
 * A0 choose chance of D0 trigger on clock from CCW never to CW always; D1
 triggers when D0 doesn't
-* A3 chooses chance of bit flip on the 16 bit shift register from CCW never to
-* A4 scales the analog out from fully attenuated CCW to fully open CW
+* A2 chooses chance of bit flip on the 16 bit shift register from CCW never to
+* A3 scales the analog out from fully attenuated CCW to fully open CW
+
+## e28_rls
+A random looping sequencer in the style of the Turing Machine and its
+predecessors. The output can be quantised with user selectable scales which
+work the same was as e22. There's also range for the output, and a sequence
+length.
+
+Sequence length is interesting; it goes from 8-40 bits, in 1 bit increments.
+The sequence is implemented internally as an array rather than as a shift
+register. The sequence length always counts from the start of the array, the
+shifting is done by moving a window through the array. The upshot is that (for
+now at least) for a locked sequence, the minimum sequence length always refers to the same
+8 positions, not those coming up in the sequence.
+
+* A0 User selectable scale for quantisation (details in the sketch). CCW is
+unquantised.
+* A1 Range for the output, CCW is minimal, CW is full range. Unlike e22, range
+is by number of notes, not by octave
+* A2 Chance of bit getting flipped (changing the sequence), CCW no chance -- so
+sequence is locked, CW is always (so sequence is locked at double length,
+2nd part is the inverse of the first).
+* A3 length of shift register, from 8 bits to 40, incrementing in single bits
+
