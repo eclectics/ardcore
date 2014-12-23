@@ -123,3 +123,25 @@ sequence is locked, CW is always (so sequence is locked at double length,
 * A3 length of shift register, from 8 bits to 40, incrementing in single bits
 * D0 trigger either following bit flip on the sequence, or chance set using A0
 on startup. D1 does the opposite, so either D0 or D1 fires each clock pulse.
+
+## e31_random
+A bunch of different sorts of random on clock, with adjustable range and some other
+parameters.
+* A0 - which random to use
+  * random (pick a number)
+  * random looping sequencer (A2 controls chance of change CCW 0% - CW 100%)
+  * random walk
+  * shift register (not really random, just a 255 length sequence)
+  * random pick of the last 12 notes
+  * flips a random bit
+  * randomly picks one of the others
+* A1 - range that the random value is mapped on to CW is full range
+* A2 - chance of flip for TM (CCW is low, CW is high)
+* A3 - chance of trigger on D0
+* D0 - trigger based on A3 chance
+* D1 - digital noise
+* Clk - required for random dac
+
+
+
+
