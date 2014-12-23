@@ -109,6 +109,10 @@ shifting is done by moving a window through the array. The upshot is that (for
 now at least) for a locked sequence, the minimum sequence length always refers to the same
 8 positions, not those coming up in the sequence.
 
+Trigger is selectable on startup using A0. CCW to about 20% and D0 fires when the 
+TM bit flips. After about 20% it's a selectable % chance to change-- but can't be
+altered without cycling power on the ardcore.
+
 * A0 User selectable scale for quantisation (details in the sketch). CCW is
 unquantised.
 * A1 Range for the output, CCW is minimal, CW is full range. Unlike e22, range
@@ -117,4 +121,5 @@ is by number of notes, not by octave
 sequence is locked, CW is always (so sequence is locked at double length,
 2nd part is the inverse of the first).
 * A3 length of shift register, from 8 bits to 40, incrementing in single bits
-
+* D0 trigger either following bit flip on the sequence, or chance set using A0
+on startup. D1 does the opposite, so either D0 or D1 fires each clock pulse.

@@ -3,6 +3,9 @@
 //  Description: Random Looping Sequencer, with quantisation option and variable loop length
 //
 //  I/O Usage:
+//    On startup A0 is used to choose behaviour of D0/D1
+//      A0 ccw; follows TM change, otherwise is chance of change from 0-100%
+//
 //    A0: Scale choice, full ccw is unquantised, or choice of available scales 
 //    A1:  quantisation range; from 1 to number of notes available 
 //    A2 In: chance of change for rand looping seq 
@@ -91,6 +94,9 @@ int scales[]={0, //used for unquantised
   byte lastscale=0;
   byte topscale=sizeof(scales)/2-1; //sizeof returns bytes, but scales are ints. This just represents the highest array index in scales
   byte ctrl=0; //which knob to read each pass
+  byte following=false;
+  byte tout;
+  byte triggerchance=0;
 
 void setup(){
     pinMode(clkIn, INPUT);  
@@ -115,6 +121,15 @@ void setup(){
    for (i=0;i<seqlength;i++){
     seq[i]=random(2);
    }
+
+  //set up triggers
+  following=false;
+  triggerchance=analogRead(A0)>>3; //0-127
+  if (triggerchance<28){
+    following=true;
+  } else{
+    triggerchance=triggerchance-28;
+  }
   // set up clock interrupt
   attachInterrupt(0, isr, RISING);
 
@@ -126,14 +141,21 @@ void loop(){
       
         //looping sequencer
           b= seq[ss]; //low bit
+          //triggers
+          if (following){
+              tout=1; //D1 will fire unless bit flips
+          }
+          else {
+            tout=(random(100)<triggerchance)?0:1;
+          }
+
           if (random(254)<chance){ //chance of bit flipping
             b=b?0:1;
-            digitalWrite(digPin[0],HIGH);
-            timeon[0]=millis()+trigTime;
-          } else {
-            digitalWrite(digPin[1],HIGH);
-            timeon[1]=millis()+trigTime;
+            if (following) tout=0;//ie fire A0 on change
           }
+          digitalWrite(digPin[tout],HIGH);
+          timeon[tout]=millis()+trigTime;
+
           seq[ss]=b; //"rotate" flipped bit 
           ss=(ss+1)%length;//increment seq
           lowbyte=rlsbyte(); //work out current value of byte for position in sequence
@@ -221,6 +243,7 @@ byte rlsbyte(){
     }
     return b;
  }
+
 
 //  ===================== end of program =======================
 
