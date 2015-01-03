@@ -58,6 +58,27 @@ a quick clock. This also allows patching a random source into A2 and using
 a gate to change the formula, or patching cv and gate from a keyboard for
 easier control.
 
+## e18_quneo
+
+An experiment in interfacing the ardcore with the KMI QuNeo controller.
+The sketch itself is a simple 16 step trigger sequencer.
+
+* clkIn for sequencer rate
+* D1 for trigger out
+* A2 for serial midi in (fully CW)
+* D0 for serial midi out
+
+The QuNeo is attached via the expander to a midi din to mini jack interface
+which goes via regular patch cables to the ardcore. I've used a powered arduino midi
+shield and a couple of alligator leads and jack sockets to do this.
+
+I'm using a QuNeo preset supplied as ArdcoreInterface.quneopreset which disables most of the midi info it's capable of
+sending, and which makes the midi notes sent by the controls match those needed
+to control the leds.
+
+The pads on the QuNeo turn on/off the different steps of the trigger sequencer.
+Stop/Run work, and the first set of horizontal arrow buttons change the
+direction of the sequence. The diamond button beside Stop resets it.
 
 ## e22_quantiser
 
