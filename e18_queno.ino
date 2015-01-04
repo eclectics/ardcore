@@ -75,8 +75,10 @@ void setup() {
     s=0;
     running=false;
     ctrllight(34,1); //stop button
+    ctrllight(35,0); //stop button
     dir=1;
     ctrllight(37,1); //forward direction
+    ctrllight(36,0); //forward direction
     for (i=0;i<16;i++){
         ctrllight(pads[i],0);
         ctrllight(pads[i]+1,0);
@@ -95,7 +97,7 @@ void loop() {
         clkState=LOW;
         //off
         s+= dir;
-        s=(s>0)?s%16:16-s;
+        s=(s>=0)?s%16:16+s;
         ctrllight(pads[lasts],0); //targetting the green leds, which are indep of the red ones
         if (triggers[s]){
             digitalWrite(digPin[1],HIGH);
@@ -120,12 +122,12 @@ void loop() {
                 dacOutput(v?n:v);
                 switch (n){
                     case 33: //rhombus (reset)
-                        s=0;
+                        s=(dir>0)?15:0;
                         break;
                     case 34://stop
                         running=false;
-                        ctrllight(35,0);
                         ctrllight(34,1);
+                        ctrllight(35,0);
                         break;
                     case 35: //run
                         running=true;
